@@ -19,12 +19,23 @@ export interface ButtonProps {
    * Optional click handler
    */
   onClick?: () => void;
+
+  /**
+   * Does this button have a field to it's left
+   * Used for styling
+   */
+  fieldLeft?: boolean;
+  /**
+   * Does this button have a field to it's right
+   * Used for styling
+   */
+  fieldRight?: boolean;
 }
 
 const StyledButton = styled.button<Omit<ButtonProps, "label">>`
   background-color: ${(props) => (props.primary ? props.theme.color.primary.main : "transparent")};
   color: ${(props) => (props.primary ? props.theme.color.primary.text : props.theme.color.secondary.text)};
-  border: ${(props) => (props.primary ? "0" : `1px solid ${props.theme.color.primary.main}`)};
+  border: ${(props) => `1px solid ${props.theme.color.primary.main}`};
   border-radius: ${(props) => props.theme.shape.borderRadius};
 
   padding: ${(props) => (props.size === "medium" ? "1rem" : props.size === "large" ? "1.5rem" : "0.75rem")};
@@ -34,6 +45,17 @@ const StyledButton = styled.button<Omit<ButtonProps, "label">>`
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  font-family: "Raleway", sans-serif;
+
+  &:focus {
+    box-shadow: 0px 0px 0px 2px ${(props) => props.theme.color.primary.light};
+  }
+
+  ${(props) =>
+    props.fieldRight ? `border-top-right-radius: 0; border-bottom-right-radius: 0; border-right-width: 0;` : ""}
+
+  ${(props) =>
+    props.fieldLeft ? `border-top-left-radius: 0; border-bottom-left-radius: 0; border-left-width: 0;` : ""}
 `;
 
 /**

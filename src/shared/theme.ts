@@ -9,6 +9,9 @@ const theme = {
       text: "#558eac",
       main: "#ffffff",
     },
+    gray: {
+      1: "#f1f1f1",
+    },
   },
   shape: {
     borderRadius: "0.25rem",

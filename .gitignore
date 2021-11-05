@@ -15,6 +15,7 @@
 #docs
 /docs-build
 /docs
+/storybook-static
 
 # misc
 .DS_Store

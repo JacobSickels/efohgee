@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ControlGroup } from "../../shared/ControlGroup";
+import { StyledLabel } from "../../shared/Label";
 
 export interface TextFieldProps {
   /**
@@ -20,9 +21,13 @@ export interface TextFieldProps {
    * For accessibility reasons, this is required
    */
   id: string;
+  /**
+   * Array of options for the select
+   */
+  options: Array<{ label: string; value: string | number }>;
 }
 
-const StyledTextField = styled.input<{ buttonRight?: boolean; buttonLeft?: boolean }>`
+const StyledSelect = styled.select<{ buttonRight?: boolean; buttonLeft?: boolean }>`
   border-color: ${(props) => props.theme.color.primary.main};
   padding: 1rem;
   outline: 0;
@@ -40,24 +45,24 @@ const StyledTextField = styled.input<{ buttonRight?: boolean; buttonLeft?: boole
   }
 `;
 
-const StyledLabel = styled.label`
-  color: black;
-  display: block;
-  padding-bottom: 0.5rem;
-
-  font-size: 1rem;
-  line-height: 1rem;
-  font-family: "Raleway", sans-serif;
+const StyledOption = styled.option`
+  &:hover {
+    color: red;
+  }
 `;
 
 /**
  * Primary UI component for user interaction
  */
-export const TextField = ({ id, label, ...props }: TextFieldProps) => {
+export const Select = ({ id, label, options, ...props }: TextFieldProps) => {
   return (
     <ControlGroup>
       <StyledLabel htmlFor={id}>{label}</StyledLabel>
-      <StyledTextField id={id} {...props} />
+      <StyledSelect id={id} {...props}>
+        {options.map((option) => (
+          <StyledOption value={option.value}>{option.label}</StyledOption>
+        ))}
+      </StyledSelect>
     </ControlGroup>
   );
 };
